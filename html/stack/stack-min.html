@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>MinStack</title>
+  </head>
+  <body></body>
+  <script src="../../js/stack.js"></script>
+  <script>
+    // 实现一个min方法的栈 且时间复杂度为O(1)
+    {
+      class MinStack {
+        constructor() {
+          this.dataStack = new Stack(); // 普通的栈
+          this.minStack = new Stack(); // 存储最小值的栈
+        }
+        // push 和 pop 两个栈都要操作，保持大小统一
+        push(item) {
+          this.dataStack.push(item); // 常规操作
+          if (this.minStack.isEmpty() || item < this.minStack.top()) {
+            this.minStack.push(item); // 保证minStack栈顶是最小的值
+          } else {
+            this.minStack.push(this.minStack.top()); // 保持两个栈的大小一样
+          }
+        }
+        pop() {
+          this.minStack.pop();
+          return this.dataStack.pop(); // 返回真实的数字
+        }
+        min() {
+          return this.minStack.top(); // 返回最小的数字
+        }
+      }
+
+      const minstack = new MinStack();
+      minstack.push(3);
+      minstack.push(2);
+      minstack.push(6);
+      minstack.push(8);
+      console.log(minstack.min()); // 2
+      console.log(minstack.pop()); // 8
+      minstack.push(1);
+      console.log(minstack.min()); // 1
+    }
+  </script>
+</html>

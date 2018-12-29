@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>fibonacci</title>
+  </head>
+
+  <body></body>
+  <script src="../../js/queue.js"></script>
+  <script>
+    {
+      function fibonacci(n) {
+        if (n <= 2) return 1;
+        var queue = new Queue();
+        // 先存入序列的前两个值
+        queue.enqueue(1);
+        queue.enqueue(1);
+        var index = 0;
+        while (index < n - 2) {
+          var delItem = queue.dequeue(); // 移除队列的头部元素
+          var headItem = queue.head(); // 获取队列头部元素(因为上一步已经将头部元素移除)
+          var resNum = delItem + headItem;
+          queue.enqueue(resNum); // 将两者之和存入队列
+          index += 1;
+        }
+        queue.dequeue();
+        return queue.head();
+      }
+      console.log("fibonacci", fibonacci(10)); // 55
+      console.log("fibonacci", fibonacci(100)); // 354224848179262000000
+    }
+  </script>
+</html>

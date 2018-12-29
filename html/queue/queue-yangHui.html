@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>yangHui</title>
+  </head>
+
+  <body></body>
+  <script src="../../js/queue.js"></script>
+  <script>
+    {
+      function yangHui(n) {
+        var queue = new Queue();
+        queue.enqueue(1); // 先在队列中存储第一行的数据
+        for (var i = 1; i <= n; i++) {
+          // 第一层循环控制层数
+          var line = "";
+          var pre = 0;
+          for (var j = n; j > i; j--) {
+            // 打印空格
+            document.write("&nbsp;");
+          }
+          for (var j = 0; j < i; j++) {
+            // 第二层控制当前层的数据
+            var item = queue.dequeue();
+            var value = item + pre; // 计算下一行的值
+            pre = item;
+            line += item + " ";
+            queue.enqueue(value);
+          }
+          queue.enqueue(1); // 将每层的最后一个数值 1 存入队列中
+          document.write(line + "<br />");
+        }
+      }
+      yangHui(10);
+    }
+  </script>
+</html>

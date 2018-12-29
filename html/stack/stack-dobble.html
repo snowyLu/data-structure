@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>isDouuble</title>
+  </head>
+  <body></body>
+  <script src="../../js/stack.js"></script>
+  <script>
+    // 给一段字符串，判断里面的括号是否是成对出现
+    {
+      function isDouuble(str) {
+        const stack = new Stack();
+        const len = str.length;
+        for (let i = 0; i < len; i++) {
+          const item = str[i];
+          if (str[i] === "(") {
+            stack.push(item); // 入栈
+          } else if (item === ")") {
+            if (stack.isEmpty()) {
+              return false;
+            } else {
+              stack.pop(); // 出栈
+            }
+          }
+        }
+        return stack.size() === 0;
+      }
+      console.log(isDouuble("()ss()ss(sss(ss)(ss)ss)")); // true
+      console.log(isDouuble("()ss()ss(sss(ss)(ss)ss)(")); // false
+      console.log(isDouuble("()ss()ss(sss(ss)(ss)ss))")); // false
+      console.log(isDouuble("()ss()ss(sss(ss)(ss)ss))(")); // false
+    }
+  </script>
+</html>

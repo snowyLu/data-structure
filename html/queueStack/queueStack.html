@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>queue->tack</title>
+  </head>
+
+  <body></body>
+  <script src="../../js/queue.js"></script>
+  <script>
+    // 用队列实现栈
+    {
+      class QueueStack {
+        constructor() {
+          this.queue1 = new Queue();
+          this.queue2 = new Queue();
+          this.dataQueue = null; // 存放数据的队列
+          this.emptyQueue = null; // 存放备份数据的队列
+        }
+        // 初始化队列数据，确认哪个队列放数据，哪个队列做备份
+        _initQueue() {
+          if (this.queue1.isEmpty()) {
+            this.dataQueue = this.queue2;
+            this.emptyQueue = this.queue1;
+          } else {
+            // 都为空的话 默认是 队列1
+            this.dataQueue = this.queue1;
+            this.emptyQueue = this.queue2;
+          }
+        }
+        // 往栈里压入一个元素
+        push(item) {
+          this._initQueue();
+          this.dataQueue.enqueue(item);
+        }
+        // 返回栈顶的元素
+        top() {
+          this._initQueue();
+          return this.dataQueue.tail();
+        }
+        // 把栈顶的元素移除
+        pop() {
+          this._initQueue();
+          while (this.dataQueue.size() > 1) {
+            // 利用备份队列转移数据，
+            this.emptyQueue.enqueue(this.dataQueue.dequeue()); // 数据队列和备份队列交换了身份
+          }
+          return this.dataQueue.dequeue(); // 移除数据队列的头部元素
+        }
+      }
+      var queueStack = new QueueStack();
+      queueStack.push(1);
+      queueStack.push(2);
+      queueStack.push(4);
+      console.log(queueStack.top()); // 栈顶是 4
+      console.log(queueStack.pop()); // 移除 4
+      queueStack.push(5);
+      console.log(queueStack.top()); // 栈顶变成 5
+      queueStack.push(6);
+      console.log(queueStack.pop()); // 移除 6
+      console.log(queueStack.pop()); // 移除5
+      console.log(queueStack.top()); // 栈顶是 2
+    }
+  </script>
+</html>

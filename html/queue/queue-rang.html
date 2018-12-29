@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>delRang</title>
+  </head>
+
+  <body></body>
+  <script src="../../js/queue.js"></script>
+  <script>
+    /*
+     有一个数组存放了100个数据0-99，
+     要求每隔两个数删除一个数，
+     到末尾时再循环至开头继续进行，
+     求最后一个被删除的数字。
+     */
+    {
+      var arr = []; // 准备0-99  100个数据
+      for (var i = 0; i < 100; i++) {
+        arr.push(i);
+      }
+      function delRang(arr) {
+        var queue = new Queue(); // 调用之前实现Queue类
+        var len = arr.length;
+        for (var i = 0; i < len; i++) {
+          queue.enqueue(i); // 将数据存入队列
+        }
+        var index = 0;
+        while (queue.size() !== 1) {
+          // 循环判断队列里大小否为还剩下1个
+          var item = queue.dequeue(); // 出队一个元素，根据当前的index来判断是否需要移除
+          index += 1;
+          if (index % 3 !== 0) {
+            queue.enqueue(item); // 不是的话，则添加到队尾，继续循环
+          }
+        }
+        console.log(queue.head()); // 90
+        return queue.head(); // 返回最后一个元素
+      }
+      delRang(arr);
+    }
+  </script>
+</html>

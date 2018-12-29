@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>stack->queue</title>
+  </head>
+
+  <body></body>
+  <script src="../../js/stack.js"></script>
+  <script>
+    // 用栈实现队列
+    {
+      class StackQueue {
+        constructor() {
+          this.stack1 = new Stack();
+          this.stack2 = new Stack();
+        }
+        _initStack() {
+          // 初始化stack，伪造私有方法
+          if (this.stack1.isEmpty() && this.stack2.isEmpty()) {
+            return null; // 如果两个栈都是空的，那么队列中就没有元素
+          }
+          if (this.stack2.isEmpty()) {
+            // 如果stack2是空的，那么此时stack1一定不为空
+            while (!this.stack1.isEmpty()) {
+              this.stack2.push(this.stack1.pop()); // 把stack1的元素移除到stack2中
+            }
+          }
+        }
+        // 向队尾添加一个元素
+        enqueue(item) {
+          this.stack1.push(item); // 把数据存入到stack1中
+        }
+        // 删除队首的一个元素
+        dequeue() {
+          this._initStack();
+          return this.stack2.pop();
+        }
+        // 返回队首的元素
+        head() {
+          this._initStack();
+          return this.stack2.top();
+        }
+      }
+      var stackQueue = new StackQueue();
+      stackQueue.enqueue(1);
+      stackQueue.enqueue(4);
+      stackQueue.enqueue(8);
+      console.log(stackQueue.head()); // 1
+      stackQueue.dequeue();
+      stackQueue.enqueue(9);
+      console.log(stackQueue.head()); // 4
+      stackQueue.dequeue();
+      console.log(stackQueue.head()); // 8
+      console.log(stackQueue.dequeue()); // 8
+      console.log(stackQueue.dequeue()); // 9
+    }
+  </script>
+</html>
