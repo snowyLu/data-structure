@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div>this is link-list</div>
+  </body>
+  <script src="../../js/linkList.js"></script>
+  <script>
+    {
+      var link = new LinkList();
+      link.append(1);
+      link.append(4);
+      link.insert(2, 1);
+      link.insert(3, 2);
+      link.insert(5, 4);
+      link.insert(6, 5);
+      link.insert(7, 10);
+      link.print();
+      link.remove(5);
+      link.getData(0);
+      link.indexOf(5);
+      link.print();
+    }
+  </script>
+</html>
