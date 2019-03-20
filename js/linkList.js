@@ -85,7 +85,7 @@ class LinkList {
       delNode = preNode.next;
       /*
     要从列表中移除当前元素，要做的是将 preNode.next 和 preNode.next.next 链接起来，
-    这样，当前元素就会被丢弃在计算机内存中，等待被垃圾回收器清楚。
+    这样，当前元素就会被丢弃在计算机内存中，等待被垃圾回收器清除。
     */
       preNode.next = preNode.next.next;
       // 如果删除的是尾节点
