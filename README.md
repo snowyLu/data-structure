@@ -7,3 +7,4 @@
 * [js 栈](https://github.com/snowyLu/data-structure/blob/master/js/stack.js)
 * [js 队列](https://github.com/snowyLu/data-structure/blob/master/js/queue.js)
 * [js 链表](https://github.com/snowyLu/data-structure/blob/master/js/linkList.js)
+* [js 递归](https://github.com/snowyLu/data-structure/blob/master/js/recursion.js)
